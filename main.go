@@ -40,7 +40,12 @@ func main() {
 	// INITIAL ROUTE
 	route.RouteInit(app)
 
+    err := app.Listen(":8080")
+    if err != nil {
+        return
+    }
+
 	// INITIAL 
 
-	app.Listen(":8080")
+	// app.Listen(":8080")
 }
