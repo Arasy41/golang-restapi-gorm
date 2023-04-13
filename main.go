@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/Artzy1401/clone-cineplex-backend-4/database"
-	"github.com/Artzy1401/clone-cineplex-backend-4/migration"
+	// "github.com/Artzy1401/clone-cineplex-backend-4/migration"
 	"github.com/Artzy1401/clone-cineplex-backend-4/route"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -36,7 +36,7 @@ func main() {
 	// }
 	// fmt.Println("Established a successful connection!")
 
-	migration.RunMigration()
+	// migration.RunMigration()
 
 	app := fiber.New()
 

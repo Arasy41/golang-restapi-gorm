@@ -29,29 +29,37 @@ func TheaterControllerGetAll(ctx *fiber.Ctx) error {
 
 func TheaterControllerGetDetails(ctx *fiber.Ctx) error {
 	theaterid := ctx.QueryInt("theaterid")
-    var theater []entity.TheaterList
-    err := database.DB.Raw(`
-		SELECT l.id, theathers.kota, theathers.cinema, theathers.contact, films.id, films.name, films.jenis_film, films.produser, films.sutradara, films.penulis, films.produksi, films.casts, films.sinopsis
-		FROM films
-		INNER JOIN theater_lists l ON l.film_id = films.id
-		INNER JOIN theathers ON l.theater_id = theathers.id
-		WHERE l.theater_id = ?`, theaterid).Scan(&theater)
 
-    if err.Error != nil{
-        log.Println(err.Error)
-    }
+	var theater entity.Theather
+	err := database.DB.First(&theater, "id = ?", theaterid).Error
+	if err != nil {
+		return ctx.Status(404).JSON(fiber.Map{
+			"message": "theater not found",
+		})
+	}
+
+	var film []entity.TheaterId
+    err = database.DB.Raw(`
+		SELECT f.id, f.name, l.theater_id AS theater_id, f.jenis_film, f. produser, f.sutradara, f.penulis, f.produksi, f.casts, f.sinopsis, f.like
+		FROM films f
+		INNER JOIN theater_lists l ON l.film_id = f.id
+		WHERE l.theater_id = ?`, theaterid).Scan(&film).Error
 	
+	var theaterdetails entity.TheaterDetails
+	theaterdetails.ID = theater.ID
+	theaterdetails.Film = film
 
     return ctx.JSON(fiber.Map{
+		"theater": theater,
+		"film" : film,
 		"message": "successfully",
-		"data": theater,
 	})
 }
 
 func TheaterControllerCreate(ctx *fiber.Ctx) error {
 	Theater := new(request.TheaterCreateRequest)
 	if err := ctx.BodyParser(Theater); err != nil {
-		return err	
+		return err
 	}
 
 	// VALIDASI REQUEST
@@ -80,6 +88,40 @@ func TheaterControllerCreate(ctx *fiber.Ctx) error {
 	return ctx.JSON(fiber.Map{
 		"message": "successfully",
 		"data": newTheater,
+	})
+}
+
+func TheaterControllerCreateTheaterList(ctx *fiber.Ctx) error {
+	Theater := new(request.TheaterListCreateRequest)
+	if err := ctx.BodyParser(Theater); err != nil {
+		return err	
+	}
+
+	// VALIDASI REQUEST
+ 	validate := validator.New()
+	errValidate := validate.Struct(Theater)
+	if errValidate != nil {
+		return ctx.Status(400).JSON(fiber.Map{
+			"message" : "failed to validate",
+			"error" : errValidate.Error(),
+		})
+	}
+
+	newTheaterList := entity.TheaterList{
+		TheaterID: Theater.TheaterID,
+		FilmID: Theater.FilmID,
+	}
+
+	errTheater := database.DB.Create(&newTheaterList).Error
+	if errTheater != nil {
+		return ctx.Status(500).JSON(fiber.Map{
+			"message": "failed to create user",
+		})
+	}
+
+	return ctx.JSON(fiber.Map{
+		"message": "successfully",
+		"data": newTheaterList,
 	})
 }
 
