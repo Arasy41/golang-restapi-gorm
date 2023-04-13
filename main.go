@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/Artzy1401/golang-restapi-gorm/database"
-	"github.com/Artzy1401/golang-restapi-gorm/migration"
-	"github.com/Artzy1401/golang-restapi-gorm/route"
+	"github.com/Artzy1401/clone-cineplex-backend-4/database"
+	"github.com/Artzy1401/clone-cineplex-backend-4/migration"
+	"github.com/Artzy1401/clone-cineplex-backend-4/route"
 	"github.com/gofiber/fiber/v2"
 	// "database/sql"
 	// "fmt"
