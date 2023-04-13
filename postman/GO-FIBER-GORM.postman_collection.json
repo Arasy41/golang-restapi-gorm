@@ -1,0 +1,708 @@
+{
+	"info": {
+		"_postman_id": "9b8158f5-6db2-4ecc-9166-f1a5110c2027",
+		"name": "GO-FIBER-GORM",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26496315"
+	},
+	"item": [
+		{
+			"name": "FILM",
+			"item": [
+				{
+					"name": "UPDATE FILM BY ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"The Super Mario Bros. Movie\",\r\n    \"jenis_film\": \"Animation, Adventure, Comedy\",\r\n    \"produser\": \"Christopher Meledandri, Shigeru Miyamoto\",\r\n    \"sutradara\": \"Aaron Horvath, Michael Jelenic\",\r\n    \"penulis\": \"Matthew Fogel\",\r\n    \"produksi\": \"Universal Pictures\",\r\n    \"casts\": \"Chris Pratt, Anya Taylor-Joy, Charlie Day, Jack Black, Keegan-Michael Key, Seth Rogen, Fred Armisen, Sebastian Maniscalco, Charles Martinet, Kevin Michael Richardson\",\r\n    \"sinopsis\": \"Kisah Mario (Chris Pratt) si tukang ledeng yang melakukan perjalanan heroik untuk menyelamatkan saudaranya, Luigi (Charlie Day). Di perjalanan, Mario tidak sendiri, ia dibantu oleh Putri Peach (Anya Taylor-Joy) dan prajurit kerajaan jamur.\",\r\n    \"like\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/film/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"film",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE LIKE FILM",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"like\": 17\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/film/:id/like",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"film",
+								":id",
+								"like"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1003"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET FILM ALL",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0cmF3Z25AZ21haWwuY29tIiwiZXhwIjoxNjc5ODg0OTIyLCJuYW1lIjoiQXRyYSIsInBhc3N3b3JkIjoiJDJhJDE0JGdab1ViaGQ1M2RqSmp5aDY4aDRVUXVxSVZpQlllQjY2eTMzVVcxRGZUejZqWE1VZVZ1SW9HIiwicm9sZSI6ImFkbWluIn0.U2X3w8juVQA9NOQz8jBrtmCjt0ZFzUAXXuEjKTlWek4",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/films",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"films"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/film/3",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"film",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET FILM BY ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "hihihiha",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/film/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"film",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1002"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE FILM",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Shazam! Fury of the Gods\",\r\n    \"jenis_film\": \"Action, Adventure, Comedy\",\r\n    \"produser\": \"Peter Safran\",\r\n    \"sutradara\": \"David F. Sandberg\",\r\n    \"penulis\": \"Henry Gayden, Chris Morgan\",\r\n    \"produksi\": \"Warner Bros. Pictures\",\r\n    \"casts\": \"Zachary Levi, Asher Angel, Lucy Liu, Helen Mirren, Grace Caroline Currey, Rachel Zegler, Meagan Good, Adam Brody, Jack Dylan Graze, Ross Butler, D.J. Cotrona, Ian Chen, Jovan Armand\",\r\n    \"sinopsis\": \"Shazam! Fury of the Gods akan kembali melanjutkan aksi Billy Batson (Asher Angel) dan saudara angkatnya menjadi Shazam. Kali ini lawan mereka bukanlah orang biasa, melainkan memiliki kekuatan super yang tak tertandingi.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/film",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"film"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE COMMENT",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0cmF3Z25AZ21haWwuY29tIiwiZXhwIjoxNjgxMzI5MzkwLCJuYW1lIjoiQXRyYSIsInBhc3N3b3JkIjoiJDJhJDE0JDljL3NTZEZBTzdTY0xGYkljY29KTk9tZzdkN1FadjA0OHR6U29EOVIveWo1WDNmLmJOaEo2Iiwicm9sZSI6ImFkbWluIn0.zviFAbImSJZvNbWz-ri4lSwFJmSckr4E2D8xAvzMuyE",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"film_id\" : \"1001\",\r\n    \"comment\" : \"Film nya bagus banget\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/comment",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL COMMENTS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0cmF3Z25AZ21haWwuY29tIiwiZXhwIjoxNjgxMzI4NjcxLCJuYW1lIjoiQXRyYSIsInBhc3N3b3JkIjoiJDJhJDE0JDljL3NTZEZBTzdTY0xGYkljY29KTk9tZzdkN1FadjA0OHR6U29EOVIveWo1WDNmLmJOaEo2Iiwicm9sZSI6ImFkbWluIn0.kmEVp6ci-ysUVlFOQza2GAQZ4tVbALNa1ku36jrvQ6E",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/comments?filmId=1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comments"
+							],
+							"query": [
+								{
+									"key": "filmId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE COMMENT",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0cmF3Z25AZ21haWwuY29tIiwiZXhwIjoxNjgxMzI5MzkwLCJuYW1lIjoiQXRyYSIsInBhc3N3b3JkIjoiJDJhJDE0JDljL3NTZEZBTzdTY0xGYkljY29KTk9tZzdkN1FadjA0OHR6U29EOVIveWo1WDNmLmJOaEo2Iiwicm9sZSI6ImFkbWluIn0.zviFAbImSJZvNbWz-ri4lSwFJmSckr4E2D8xAvzMuyE",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/comment/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"comment",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "3001"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "USER",
+			"item": [
+				{
+					"name": "UPDATE USER BY ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Aufa\",\r\n    \"email\": \"algifari@gmail.com\",\r\n    \"password\": \"aufa1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/4",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL USER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0cmF3Z25AZ21haWwuY29tIiwiZXhwIjoxNjgxMTM4NjUwLCJuYW1lIjoiQXRyYSIsInBhc3N3b3JkIjoiJDJhJDE0JDljL3NTZEZBTzdTY0xGYkljY29KTk9tZzdkN1FadjA0OHR6U29EOVIveWo1WDNmLmJOaEo2Iiwicm9sZSI6ImFkbWluIn0.XD0mAVgvA6-Q2C4QtXCil7p5eB1mU7ITBQqLtmk5VLM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImF0cmF3Z25AZ21haWwuY29tIiwiZXhwIjoxNjgwNjgyNzIzLCJuYW1lIjoiQXRyYSIsInBhc3N3b3JkIjoiJDJhJDE0JDljL3NTZEZBTzdTY0xGYkljY29KTk9tZzdkN1FadjA0OHR6U29EOVIveWo1WDNmLmJOaEo2Iiwicm9sZSI6ImFkbWluIn0.ZmpvxKtbB71sCUnJ-WdbCDDx3Y5kSIvWvbXo-F5puL8",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE USER BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET USER BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE USER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Atra\",\r\n    \"email\": \"atrawgn@gmail.com\",\r\n    \"password\": \"atra1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE EMAIL USER",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"kautsarrifqi@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/user/:id/update-email",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"user",
+								":id",
+								"update-email"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "THEATER",
+			"item": [
+				{
+					"name": "UPDATE THEATER BY ID",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"kota\": \"JAKARTA\",\r\n    \"cinema\": \"AEON MALL TANJUNG BARAT XXI\",\r\n    \"contact\": \"(021) 50915953\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/theater/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theater",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET ALL THEATER",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://localhost:8080/theater",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theater"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE THEATER BY ID",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/theater/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theater",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET THEATER BY ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/theater/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theater",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CREATE THEATER",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"kota\": \"BANDUNG\",\r\n    \"cinema\": \"BRAGA XXI\",\r\n    \"contact\": \"(022) 844 60121\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/theater",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"theater"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET THEATER LIST",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/films/theaterlist?theaterid=2001",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"films",
+								"theaterlist"
+							],
+							"query": [
+								{
+									"key": "theaterid",
+									"value": "2001"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GET THEATER DETAILS",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AUTH",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"atrawgn@gmail.com\",\r\n    \"password\": \"atra1234\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"login"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
