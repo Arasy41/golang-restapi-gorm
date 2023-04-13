@@ -22,7 +22,7 @@ var DB *gorm.DB
 func DatabaseInit() {
 	var err error
 
-	const MYSQL = "root:@tcp(127.0.0.1:3306)/nyobafilm?charset=utf8mb4&parseTime=True&loc=Local"
+	const MYSQL = "root:@tcp(127.0.0.1:3306)/clone-cineplex-tim4?charset=utf8mb4&parseTime=True&loc=Local"
 	dsn := MYSQL
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {
