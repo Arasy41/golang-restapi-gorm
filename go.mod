@@ -1,4 +1,4 @@
-module github.com/Artzy1401/golang-restapi-gorm
+module github.com/Artzy1401/clone-cineplex-backend-4
 
 go 1.20
 

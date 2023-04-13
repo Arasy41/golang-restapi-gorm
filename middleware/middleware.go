@@ -1,7 +1,7 @@
 package middleware
 
 import (
-	"github.com/Artzy1401/golang-restapi-gorm/utils"
+	"github.com/Artzy1401/clone-cineplex-backend-4/utils"
 	"github.com/gofiber/fiber/v2"
 )
 

@@ -3,9 +3,9 @@ package controller
 import (
 	"log"
 
-	"github.com/Artzy1401/golang-restapi-gorm/database"
-	"github.com/Artzy1401/golang-restapi-gorm/model/entity"
-	"github.com/Artzy1401/golang-restapi-gorm/model/request"
+	"github.com/Artzy1401/clone-cineplex-backend-4/database"
+	"github.com/Artzy1401/clone-cineplex-backend-4/model/entity"
+	"github.com/Artzy1401/clone-cineplex-backend-4/model/request"
 	"github.com/go-playground/validator"
 	"github.com/gofiber/fiber/v2"
 )
@@ -29,16 +29,19 @@ func TheaterControllerGetAll(ctx *fiber.Ctx) error {
 
 func TheaterControllerGetDetails(ctx *fiber.Ctx) error {
 	theaterid := ctx.QueryInt("theaterid")
-    var film []entity.TheaterDetails
+    var theater []entity.TheaterList
     err := database.DB.Raw(`
 		SELECT theathers.id, theathers.kota, theathers.cinema, theathers.contact, films.id, films.name, films.jenis_film, films.produser, films.sutradara, films.penulis, films.produksi, films.casts, films.sinopsis
 		FROM theathers, films
 		INNER JOIN theater_lists l ON l.film_id = films.id
-		WHERE theathers.id = ?`, theaterid).Scan(&film)
+		WHERE theathers.id = ?`, theaterid).Scan(&theater)
 
     if err.Error != nil{
         log.Println(err.Error)
     }
+
+	var film []entity.TheaterId
+	
 
     return ctx.JSON(fiber.Map{
 		"message": "successfully",

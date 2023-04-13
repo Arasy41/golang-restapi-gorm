@@ -1,9 +1,9 @@
 package route
 
 import (
-	"github.com/Artzy1401/golang-restapi-gorm/config"
-	"github.com/Artzy1401/golang-restapi-gorm/controller"
-	"github.com/Artzy1401/golang-restapi-gorm/middleware"
+	"github.com/Artzy1401/clone-cineplex-backend-4/config"
+	"github.com/Artzy1401/clone-cineplex-backend-4/controller"
+	"github.com/Artzy1401/clone-cineplex-backend-4/middleware"
 	"github.com/gofiber/fiber/v2"
 )
 

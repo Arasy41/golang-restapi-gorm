@@ -3,9 +3,9 @@ package controller
 import (
 	"log"
 
-	"github.com/Artzy1401/golang-restapi-gorm/database"
-	"github.com/Artzy1401/golang-restapi-gorm/model/entity"
-	"github.com/Artzy1401/golang-restapi-gorm/model/request"
+	"github.com/Artzy1401/clone-cineplex-backend-4/database"
+	"github.com/Artzy1401/clone-cineplex-backend-4/model/entity"
+	"github.com/Artzy1401/clone-cineplex-backend-4/model/request"
 	"github.com/go-playground/validator"
 	"github.com/gofiber/fiber/v2"
 )
