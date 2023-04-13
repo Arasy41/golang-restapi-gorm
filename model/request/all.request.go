@@ -31,10 +31,6 @@ type FilmLikeUpdateRequest struct {
 	Like 		uint 	`json:"like"`
 }
 
-type FilmCommentCreateRequest struct {
-	Komentar 	string `json:"komentar"`
-}
-
 type UserCreateRequest struct {
 	Name 		string `json:"name" validate:"required"` 
 	Email 		string 	`json:"email" validate:"required,email"`
@@ -61,4 +57,9 @@ type TheaterUpdateRequest struct {
 	Kota string `json:"kota"`
 	Cinema string `json:"cinema"`
 	Contact string `json:"contact"`
+}
+
+type CommentCreateRequest struct {
+	FilmID    uint      `json:"film_id"`
+	Comment   string    `json:"comment"`
 }

@@ -25,6 +25,26 @@ func FilmControllerGetAll(ctx *fiber.Ctx) error {
 	return ctx.JSON(film)
 }
 
+func FilmHandlerGetByTheaterId(ctx *fiber.Ctx) error {
+    theaterid := ctx.QueryInt("theaterid")
+    var film []entity.TheaterId
+    err := database.DB.Raw(`
+		SELECT f.id, f.name, l.theater_id AS theater_id, f.jenis_film, f. produser, f.sutradara, f.penulis, f.produksi, f.casts, f.sinopsis, f.like
+		FROM films f
+		INNER JOIN theater_lists l ON l.film_id = f.id
+		WHERE l.theater_id = ?`, theaterid).Scan(&film)
+
+    if err.Error != nil{
+        log.Println(err.Error)
+    }
+
+    return ctx.JSON(fiber.Map{
+		"message": "successfully",
+		"data": film,
+	})
+}
+
+
 func FilmControllerCreate(ctx *fiber.Ctx) error {
 	film := new(request.FilmCreateRequest)
 	if err := ctx.BodyParser(film); err != nil {
@@ -187,56 +207,81 @@ func FilmControllerLikeUpdate(ctx *fiber.Ctx) error{
 	})
 }
 
-func FilmControllerCreateComment(ctx *fiber.Ctx) error{
-	filmRequest := new(request.FilmCommentCreateRequest)
-	if err := ctx.BodyParser(filmRequest); err != nil {
+func CommentControllerGetComments(ctx *fiber.Ctx) error {
+	filmId := ctx.QueryInt("filmId")
+    var film []entity.Film
+    err := database.DB.Raw(`
+		SELECT f.id, f.name, f.jenis_film, f. produser, f.sutradara, f.penulis, f.produksi, f.casts, f.sinopsis, f.like, c.comment
+		FROM films f
+		INNER JOIN comments c ON c.film_id = f.id
+		WHERE c.film_id = ?`, filmId).Scan(&film)
+
+    if err.Error != nil{
+        log.Println(err.Error)
+    }
+    // return ctx.JSON(film)
+
+	// var film []entity.Comment
+	// result := database.DB.Find(&film)
+	// if result.Error != nil {
+	// 	log.Println(result.Error)
+	// }
+
+	// err := database.DB.Find(&film).Error
+	// if err != nil {
+	// 	log.Println(err)
+	// }
+
+	return ctx.JSON(film)
+}
+
+func CommentControllerCreate(ctx *fiber.Ctx) error {
+	Comment := new(request.CommentCreateRequest)
+	if err := ctx.BodyParser(Comment); err != nil {
+		return err
+	}
+
+	// VALIDASI REQUEST
+ 	validate := validator.New()
+	errValidate := validate.Struct(Comment)
+	if errValidate != nil {
 		return ctx.Status(400).JSON(fiber.Map{
-			"message": "Bad Request",
+			"message" : "failed to validate",
+			"error" : errValidate.Error(),
 		})
 	}
 
-	var film entity.Film
-
-	filmId := ctx.Params("id")
-	// CHECK AVALAIBLE FILM
-	err := database.DB.First(&film, "id = ?", filmId).Error
-	if err != nil {
-		return ctx.Status(404).JSON(fiber.Map{
-			"message": "film not found",
-		})
+	newComment := entity.Comment{
+		FilmID:		Comment.FilmID,
+		Comment:		Comment.Comment,
 	}
 
-	// UPDATE USER DATA
-	film.Komentar = filmRequest.Komentar
-	
-
-	errUpdate := database.DB.Save(&film).Error
-	if errUpdate != nil {
+	errCreateComment := database.DB.Create(&newComment).Error
+	if errCreateComment != nil {
 		return ctx.Status(500).JSON(fiber.Map{
-			"message": "internal server error",
+			"message": "failed to create comment",
 		})
 	}
 
 	return ctx.JSON(fiber.Map{
 		"message": "successfully",
-		"data": film,
+		"data": newComment,
 	})
 }
 
-func FilmControllerDeleteComment(ctx *fiber.Ctx) error{
-	filmId := ctx.Params("id")
-	var film entity.Film
-	var comment = film.Komentar
+func CommentControllerDelete(ctx *fiber.Ctx) error {
+	commentid := ctx.Params("id")
+	var comment entity.Comment
 
-	// CHECK AVAILABLE FILM
-	err := database.DB.First(&film, "id=?" ,&filmId).Error
+	// CHECK AVAILABLE COMMENT
+	err := database.DB.Debug().First(&comment, "id=?" ,&commentid).Error
 	if err != nil {
 		return ctx.Status(404).JSON(fiber.Map{
-			"message": "Film Not Found",
+			"message": "comment Not Found",
 		})
 	}
 
-	errDelete := database.DB.Delete(&comment).Error
+	errDelete := database.DB.Debug().Delete(&comment).Error
 	if errDelete != nil {
 		return ctx.Status(500).JSON(fiber.Map{
 			"message": "internal server error",

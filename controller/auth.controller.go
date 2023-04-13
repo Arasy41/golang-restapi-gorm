@@ -52,7 +52,7 @@ func LoginController(ctx *fiber.Ctx) error {
 	claims["name"] = user.Name
 	claims["email"] = user.Email
 	claims["password"] = user.Password
-	claims["exp"] = time.Now().Add(time.Minute * 2).Unix()
+	claims["exp"] = time.Now().Add(time.Minute * 5).Unix()
 
 	if user.Email == "atrawgn@gmail.com" {
 		claims["role"] = "admin"
@@ -71,4 +71,8 @@ func LoginController(ctx *fiber.Ctx) error {
 	return ctx.JSON(fiber.Map{
 		"token": token,
 	})
+}
+
+func RegisterController() {
+
 }
