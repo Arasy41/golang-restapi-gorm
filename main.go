@@ -7,7 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	// "database/sql"
 	// "fmt"
-	_ "github.com/lib/pq"
+	//_ "github.com/lib/pq"
 
 )
 // const (
