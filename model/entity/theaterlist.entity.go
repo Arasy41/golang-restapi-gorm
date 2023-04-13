@@ -7,3 +7,11 @@ type TheaterList struct {
 	FilmID uint `json:"filmid"`
 	Film Film `gorm:"foreignKey:FilmID"`
 }
+
+type TheaterDetails struct {
+	ID        uint      `json:"id" gorm:"primaryKey"`
+	Kota      string    `json:"kota"`
+	Cinema    string    `json:"cinema"`
+	Contact   string    `json:"contact"`
+	Film      []Film	`json:"film"`
+}
