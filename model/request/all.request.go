@@ -65,7 +65,7 @@ type TheaterUpdateRequest struct {
 }
 
 type CommentCreateRequest struct {
-	FilmID    uint      `json:"film_id"`
-	Comment   string    `json:"comment"`
+	FilmID    uint      `json:"film_id" validate:"required"`
+	Comment   string    `json:"comment" validate:"required"`
 }
 

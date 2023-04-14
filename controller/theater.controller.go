@@ -47,11 +47,15 @@ func TheaterControllerGetDetails(ctx *fiber.Ctx) error {
 	
 	var theaterdetails entity.TheaterDetails
 	theaterdetails.ID = theater.ID
+	theaterdetails.Kota = theater.Kota
+	theaterdetails.Cinema = theater.Cinema
+	theaterdetails.Contact = theater.Contact
 	theaterdetails.Film = film
 
     return ctx.JSON(fiber.Map{
 		"theater": theater,
 		"film" : film,
+		"details" : theaterdetails,
 		"message": "successfully",
 	})
 }
@@ -115,7 +119,7 @@ func TheaterControllerCreateTheaterList(ctx *fiber.Ctx) error {
 	errTheater := database.DB.Create(&newTheaterList).Error
 	if errTheater != nil {
 		return ctx.Status(500).JSON(fiber.Map{
-			"message": "failed to create user",
+			"message": "failed to create theater list",
 		})
 	}
 

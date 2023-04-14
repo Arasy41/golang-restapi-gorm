@@ -21,9 +21,10 @@ func RouteInit(r *fiber.App) {
 	r.Put("/film/:id", controller.FilmControllerUpdate)
 	r.Delete("/film/:id", controller.FilmControllerDelete)
 	r.Put("/film/:id/like", controller.FilmControllerLikeUpdate)
+	
 	r.Get("/comments", middleware.Auth, controller.CommentControllerGetComments)
-	r.Post("/comment",middleware.Auth, controller.CommentControllerCreate)
-	r.Delete("/comment/:id",middleware.Auth, controller.CommentControllerDelete)
+	r.Post("/comment", middleware.Auth, controller.CommentControllerCreate)
+	r.Delete("/comment/:id", middleware.Auth, controller.CommentControllerDelete)
 
 	// USER
 	r.Get("/user", middleware.Auth, controller.UserControllerGetAll)
@@ -39,7 +40,7 @@ func RouteInit(r *fiber.App) {
 	r.Get("/films/theaterlist", controller.FilmHandlerGetByTheaterId)
 	r.Get("/theaterdetails", controller.TheaterControllerGetDetails)
 	r.Post("/theater", controller.TheaterControllerCreate)
-	r.Post("/theaterlist", controller.TheaterControllerCreateTheaterList)
+	r.Post("/theater/list", controller.TheaterControllerCreateTheaterList)
 	r.Put("/theater/:id", controller.TheaterControllerUpdate)
 	r.Delete("/theater/:id", controller.TheaterControllerDelete)
 
