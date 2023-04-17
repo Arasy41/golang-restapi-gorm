@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/Artzy1401/clone-cineplex-backend-4/database"
@@ -46,45 +47,59 @@ func FilmHandlerGetByTheaterId(ctx *fiber.Ctx) error {
 
 
 func FilmControllerCreate(ctx *fiber.Ctx) error {
-	film := new(request.FilmCreateRequest)
-	if err := ctx.BodyParser(film); err != nil {
-		return err
-	}
+    film := new(request.FilmCreateRequest)
+    if err := ctx.BodyParser(film); err != nil {
+        return err
+    }
 
-	// VALIDASI REQUEST
- 	validate := validator.New()
-	errValidate := validate.Struct(film)
-	if errValidate != nil {
-		return ctx.Status(400).JSON(fiber.Map{
-			"message" : "failed to validate",
-			"error" : errValidate.Error(),
-		})
-	}
+    // VALIDASI REQUEST
+    validate := validator.New()
+    errValidate := validate.Struct(film)
+    if errValidate != nil {
+        return ctx.Status(400).JSON(fiber.Map{
+            "message": "Gagal",
+            "error":   errValidate.Error(),
+        })
+    }
 
+    //HANDLE FILE
+    file, errFile := ctx.FormFile("cover")
+    if errFile != nil {
+        log.Println("Error File: ", errFile)
+    }
 
-	newFilm := entity.Film{
-		Name:		film.Name,
-		JenisFilm: 	film.JenisFilm,
-		Produser: 	film.Produser,
-		Sutradara: 	film.Sutradara,
-		Penulis:	film.Penulis,
-		Produksi:	film.Produksi,
-		Casts:		film.Casts,
-		Sinopsis:	film.Sinopsis,
-	}
+    filename := file.Filename
 
-	errCreateFilm := database.DB.Create(&newFilm).Error
-	if errCreateFilm != nil {
-		return ctx.Status(500).JSON(fiber.Map{
-			"message": "failed to create film",
-		})
-	}
+    errSaveFile := ctx.SaveFile(file, fmt.Sprintf("./public/asset/%s", filename))
+    if errSaveFile != nil {
+        log.Println("File gagal disimpan")
+    }
 
-	return ctx.JSON(fiber.Map{
-		"message": "successfully",
-		"data": newFilm,
-	})
+    newFilm := entity.Film{
+        Name:     film.Name,
+        JenisFilm: film.JenisFilm,
+        Produser:  film.Produser,
+        Sutradara: film.Sutradara,
+        Penulis:   film.Penulis,
+        Produksi:  film.Produksi,
+        Casts:     film.Casts,
+        Sinopsis:  film.Sinopsis,
+        Cover:     filename,
+    }
+
+    errCreateFilm := database.DB.Create(&newFilm).Error
+    if errCreateFilm != nil {
+        return ctx.Status(500).JSON(fiber.Map{
+            "message": "Tidak berhasil menyimpan data",
+        })
+    }
+
+    return ctx.JSON(fiber.Map{
+        "message": "Berhasil",
+        "data":    newFilm,
+    })
 }
+
 
 
 func FilmControllerGetById(ctx *fiber.Ctx) error{

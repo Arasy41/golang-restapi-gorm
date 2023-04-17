@@ -11,24 +11,24 @@ import (
 )
 
 func CommentControllerGetComments(ctx *fiber.Ctx) error {
-	filmId := ctx.QueryInt("filmId")
-    var film []entity.Film
-    err := database.DB.Raw(`
-		SELECT f.id, f.name, f.jenis_film, f. produser, f.sutradara, f.penulis, f.produksi, f.casts, f.sinopsis, f.like, c.comment
-		FROM films f
-		INNER JOIN comments c ON c.film_id = f.id
-		WHERE c.film_id = ?`, filmId).Scan(&film)
+	// filmId := ctx.QueryInt("filmId")
+    // var film []entity.Comment
+    // err := database.DB.Raw(`
+	// 	SELECT f.id, f.name, f.jenis_film, f. produser, f.sutradara, f.penulis, f.produksi, f.casts, f.sinopsis, f.like, c.comment
+	// 	FROM films f
+	// 	INNER JOIN comments c ON c.film_id = f.id
+	// 	WHERE c.film_id = ?`, filmId).Scan(&film)
 
-    if err.Error != nil{
-        log.Println(err.Error)
-    }
+    // if err.Error != nil{
+    //     log.Println(err.Error)
+    // }
     // return ctx.JSON(film)
 
-	// var film []entity.Comment
-	// result := database.DB.Find(&film)
-	// if result.Error != nil {
-	// 	log.Println(result.Error)
-	// }
+	var film []entity.Comment
+	result := database.DB.Find(&film)
+	if result.Error != nil {
+		log.Println(result.Error)
+	}
 
 	// err := database.DB.Find(&film).Error
 	// if err != nil {

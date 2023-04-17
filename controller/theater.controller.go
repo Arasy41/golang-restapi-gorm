@@ -53,8 +53,6 @@ func TheaterControllerGetDetails(ctx *fiber.Ctx) error {
 	theaterdetails.Film = film
 
     return ctx.JSON(fiber.Map{
-		"theater": theater,
-		"film" : film,
 		"details" : theaterdetails,
 		"message": "successfully",
 	})
