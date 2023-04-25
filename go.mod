@@ -1,6 +1,6 @@
 module github.com/Artzy1401/clone-cineplex-backend-4
 
-go 1.20
+go 1.19
 
 require (
 	github.com/gofiber/fiber/v2 v2.43.0

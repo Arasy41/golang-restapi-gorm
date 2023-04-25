@@ -1,8 +1,11 @@
 package controller
 
 import (
+	// "database/sql"
 	"fmt"
 	"log"
+	// "sort"
+	"strconv"
 
 	"github.com/Artzy1401/clone-cineplex-backend-4/database"
 	"github.com/Artzy1401/clone-cineplex-backend-4/model/entity"
@@ -13,17 +16,37 @@ import (
 
 func FilmControllerGetAll(ctx *fiber.Ctx) error {
 	var film []entity.Film
-	result := database.DB.Find(&film)
-	if result.Error != nil {
-		log.Println(result.Error)
+	
+	sql := "SELECT * FROM films"
+
+	if s := ctx.Query("s"); s != "" {
+		sql = fmt.Sprintf("%s WHERE title LIKE '%%%s%%' OR description LIKE '%%%s%%'", sql, s, s)
 	}
+
+	if sort := ctx.Query("sort"); sort != "" {
+		sql = fmt.Sprintf("%s ORDER BY id %s", sql, sort)
+	}
+
+	page, _ := strconv.Atoi(ctx.Query("page", "1"))
+		perPage := 9
+		var total int64
+
+		database.DB.Raw(sql).Count(&total)
+
+		sql = fmt.Sprintf("%s LIMIT %d OFFSET %d", sql, perPage, (page-1)*perPage)
+
+	database.DB.Raw(sql).Scan(&film)
 
 	// err := database.DB.Find(&film).Error
 	// if err != nil {
 	// 	log.Println(err)
 	// }
 
-	return ctx.JSON(film)
+	return ctx.JSON(fiber.Map{
+		"film": film,
+		"total": total,
+		"page": page,
+	})
 }
 
 func FilmHandlerGetByTheaterId(ctx *fiber.Ctx) error {

@@ -1,6 +1,10 @@
 package entity
 
-import "time"
+import (
+	"time"
+
+	"github.com/Artzy1401/clone-cineplex-backend-4/utils"
+)
 
 type Film struct {
 	ID        uint      `json:"id" gorm:"primaryKey"`
@@ -48,4 +52,9 @@ type FilmComment struct {
 	Comment   string 	`json:"comment"`
 	CreatedAt time.Time `json:"created_at"`
 	UpdatedAt time.Time `json:"updated_at"`
+}
+
+type GetAllFilm struct {
+	Films		[]Film						`json:"films"`
+	Pagination 	*utils.PaginationResponse	`json:"pagination"`
 }
