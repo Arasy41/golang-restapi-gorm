@@ -92,6 +92,6 @@ func CommentControllerDelete(ctx *fiber.Ctx) error {
 	}
 
 	return ctx.JSON(fiber.Map{
-		"message": "comment deleted",
+		"message": "comment telah dihapus",
 	})
 }
